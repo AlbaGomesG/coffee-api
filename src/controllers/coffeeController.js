@@ -7,6 +7,18 @@ const getAllCoffees = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Erro ao buscar bebidas" });
     }
-}
+};
 
-module.exports = { getAllCoffees };
+const getCoffee = async (req, res) => {
+    try {
+        const coffee = await coffeeModel.getCoffeeById(req.params.id);
+        if (!coffee) {
+            return res.status(404).json({ error: "Bebida não encontrada" });
+        }
+        res.json(coffee);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao buscar bebida" });
+    }
+};
+
+module.exports = { getAllCoffees, getCoffee };

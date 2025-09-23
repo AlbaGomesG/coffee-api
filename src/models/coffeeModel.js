@@ -5,4 +5,9 @@ const getCoffees = async () => {
     return result.rows;
 };
 
-module.exports = { getCoffees };
+const getCoffeeById = async (id) => {
+    const result = await pool.query("SELECT * FROM coffee WHERE id = $1", [id]);
+    return result.rows[0];
+};
+
+module.exports = { getCoffees, getCoffeeById };
