@@ -10,4 +10,9 @@ const getCoffeeById = async (id) => {
     return result.rows[0];
 };
 
-module.exports = { getCoffees, getCoffeeById };
+const createCoffee = async (image, title, description, ingredients) => {
+    const result = await pool.query("INSERT INTO coffee (image, title, description, ingredients) VALUES ($1, $2, $3, $4) RETURNING *", [image, title, description, ingredients]);
+    return result.rows[0];
+};
+
+module.exports = { getCoffees, getCoffeeById, createCoffee };

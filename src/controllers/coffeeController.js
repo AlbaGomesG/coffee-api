@@ -21,4 +21,18 @@ const getCoffee = async (req, res) => {
     }
 };
 
-module.exports = { getAllCoffees, getCoffee };
+const createCoffee = async (req, res) => {
+    try {
+        const {title, description, ingredients} = req.body;
+        const image = req.file ? req.file.filename : null;
+        const newCoffee = await coffeeModel.createCoffee(image, title, description, ingredients);
+        res.status(201).json(newCoffee);
+    } catch (error) {
+        if (error.code === "23505") {
+            return res.status(400).json({ message: "Essa bebida já está cadastrada no nosso sistema"});
+        }
+        res.status(500).json({ error: "Erro ao criar bebida" });
+    }
+};
+
+module.exports = { getAllCoffees, getCoffee, createCoffee };
