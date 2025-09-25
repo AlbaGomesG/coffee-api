@@ -20,4 +20,9 @@ const updateCoffee = async (id,  title, description, ingredients) => {
     return result.rows[0];
 };
 
-module.exports = { getCoffees, getCoffeeById, createCoffee, updateCoffee };
+const deleteCoffee = async (id) => {
+    const result = await pool.query("DELETE FROM coffee WHERE id = $1 RETURNING *", [id]);
+    return result.rows[0];
+}
+
+module.exports = { getCoffees, getCoffeeById, createCoffee, updateCoffee, deleteCoffee };

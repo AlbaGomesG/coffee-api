@@ -48,4 +48,13 @@ const updateCoffee = async (req, res) => {
     }
 };
 
-module.exports = { getAllCoffees, getCoffee, createCoffee, updateCoffee };
+const deleteCoffee = async (req, res) => {
+    try {
+        const message = await coffeeModel.deleteCoffee(req.params.id);
+        res.json(message);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao deletar bebida" });
+    }
+};
+
+module.exports = { getAllCoffees, getCoffee, createCoffee, updateCoffee, deleteCoffee };
