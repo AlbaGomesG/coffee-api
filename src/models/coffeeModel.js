@@ -15,4 +15,9 @@ const createCoffee = async (image, title, description, ingredients) => {
     return result.rows[0];
 };
 
-module.exports = { getCoffees, getCoffeeById, createCoffee };
+const updateCoffee = async (id,  title, description, ingredients) => {
+    const result = await pool.query("UPDATE coffee SET title = $1, description = $2, ingredients = $3 WHERE id = $4 RETURNING *", [title, description, ingredients, id]);
+    return result.rows[0];
+};
+
+module.exports = { getCoffees, getCoffeeById, createCoffee, updateCoffee };

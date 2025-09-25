@@ -35,4 +35,17 @@ const createCoffee = async (req, res) => {
     }
 };
 
-module.exports = { getAllCoffees, getCoffee, createCoffee };
+const updateCoffee = async (req, res) => {
+    try {
+        const {title, description, ingredients} = req.body; 
+        const updatedCoffee = await coffeeModel.updateCoffee(req.params.id, title, description, ingredients);
+        if (!updatedCoffee) {
+            return res.status(404).json({ message: "Bebida não encontrada"});
+        }
+        res.json(updatedCoffee);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao atualizar bebida" });
+    }
+};
+
+module.exports = { getAllCoffees, getCoffee, createCoffee, updateCoffee };

@@ -6,5 +6,6 @@ const upload = require("../config/upload.js");
 router.get("/coffees", coffeeController.getAllCoffees);
 router.get("/coffees/:id", coffeeController.getCoffee);
 router.post("/coffees", upload.single("image"), coffeeController.createCoffee);
+router.put("/coffees/:id", coffeeController.updateCoffee);
 
 module.exports = router;
